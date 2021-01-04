@@ -17,6 +17,7 @@ import java.util.HashMap;
 public final class SimpleStaffChat extends JavaPlugin implements Listener {
     // Var
     public static HashMap<Player, Boolean> hasEnabled = new HashMap<>();
+    public boolean update = false;
 
     @Override
     public void onEnable() {
@@ -28,6 +29,17 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         getCommand("staffchat").setExecutor(new Staffchat(this));
         getCommand("staffchatreload").setExecutor(new StaffchatReload(this));
+
+        // Update Check
+        new UpdateChecker(this, 87460).getVersion(version -> {
+            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                // logger.info("There is not a new update available.");
+                update = false;
+            } else {
+                // logger.info("There is a new update available.");
+                update = true;
+            }
+        });
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &ePlugin&a Activated&e."));
     }
@@ -78,6 +90,9 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         // Add to HashMap
         if(p.hasPermission("simplestaffchat.use")) {
             hasEnabled.put(p, false);
+            if(update) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &eHey user, there is an &aupdate&e to Simple Staff Chat!"));
+            }
         }
     }
 
