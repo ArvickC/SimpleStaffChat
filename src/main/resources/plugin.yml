@@ -4,3 +4,17 @@ main: me.crazybanana.simplestaffchat.SimpleStaffChat
 api-version: 1.16
 authors: [CrazyBanana]
 description: This is a very simple plugin that implements staff chat
+permissions:
+  simplestaffchat.use:
+    default: op
+    description: Allows use of chatting in staff chat through either the command and the character.
+  simplestaffchat.reload:
+    default: op
+    description: Allows you to reload the plugin.
+commands:
+  staffchat:
+    description: Main command for the plugin
+    aliases: [sc]
+  staffchatreload:
+    description: Reload the config file for this plugin
+    aliases: [scr, screload]

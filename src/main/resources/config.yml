@@ -1,0 +1,7 @@
+# Hello and Welcome to Simple Staff Chat's config file.
+# Here is where you will be able to edit everything!
+
+# This is the character you will use to talk in staff chat
+# Example:
+# "# " will mean you will have to do "# <msg>" to talk in staff chat
+Character: '# '
