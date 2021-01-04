@@ -13,11 +13,11 @@ You can also use the /staffchat command. What this will do is toggle your staff 
 
 # Permissions
 
-## simplestaffchat.use: 
+### simplestaffchat.use: 
   - Allows use of chatting in staff chat through either the command and the character.
   - Default: Op
 
-## simplestaffchat.reload:
+### simplestaffchat.reload:
 - Allows you to reload the plugin.
 - Default: Op
 
