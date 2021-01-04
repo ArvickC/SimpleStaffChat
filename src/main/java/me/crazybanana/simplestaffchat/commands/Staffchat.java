@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Staffchat implements CommandExecutor {
+    // Constructor
     SimpleStaffChat pl;
     public Staffchat(Plugin plugin) {
         pl = (SimpleStaffChat) plugin;
@@ -18,8 +19,9 @@ public class Staffchat implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
+        // Permission
         if(sender.hasPermission("simplestaffchat.use")) {
+            // Usage
             if(args.length == 0) {
                 Player p = (Player) sender;
                 if(!SimpleStaffChat.hasEnabled.get(p)) {
@@ -38,16 +40,19 @@ public class Staffchat implements CommandExecutor {
 
         return false;
     }
-
+    // Send constant title
     private void sendPlayerTitle(SimpleStaffChat plugin, Player p) {
+        // Timer
         new BukkitRunnable() {
             @Override
             public void run() {
+                // End check
                 if (!SimpleStaffChat.hasEnabled.get(p)) {
                     cancel();
                 }
+                // Title
                 p.sendTitle("", "§eStaff Chat", 0, 8, 0);
             }
-        }.runTaskTimer(plugin, 5L, 5L);
+        }.runTaskTimer(plugin, 5L, 5L); // Runs 4x second
     }
 }

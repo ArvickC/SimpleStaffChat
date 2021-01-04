@@ -1,5 +1,5 @@
 name: SimpleStaffChat
-version: ${project.version}
+version: 1.0.0
 main: me.crazybanana.simplestaffchat.SimpleStaffChat
 api-version: 1.16
 authors: [CrazyBanana]
@@ -12,9 +12,9 @@ permissions:
     default: op
     description: Allows you to reload the plugin.
 commands:
-  staffchat:
+  staffchat: # ../me/crazybanana/simplestaffchat/commands/staffchat.java
     description: Main command for the plugin
     aliases: [sc]
-  staffchatreload:
+  staffchatreload: # ../me/crazybanana/simplestaffchat/commands/staffchatreload.java
     description: Reload the config file for this plugin
     aliases: [scr, screload]

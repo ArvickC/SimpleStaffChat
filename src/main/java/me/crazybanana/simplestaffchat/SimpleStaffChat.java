@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 
 public final class SimpleStaffChat extends JavaPlugin implements Listener {
+    // Var
     public static HashMap<Player, Boolean> hasEnabled = new HashMap<>();
 
     @Override
@@ -23,6 +24,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
+        // Reg.
         Bukkit.getPluginManager().registerEvents(this, this);
         getCommand("staffchat").setExecutor(new Staffchat(this));
         getCommand("staffchatreload").setExecutor(new StaffchatReload(this));
@@ -38,14 +40,18 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
+        // Var
         String message = e.getMessage();
         String start = getConfig().getString("Character");
         Player p = e.getPlayer();
 
+        // Check start
         if(message.startsWith(start)) {
             String finalMessage = message.replaceFirst("# ", "");
 
+            // Permission
             if(p.hasPermission("simplestaffchat.use")) {
+                // Send message
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(player.hasPermission("simplestaffchat.use")) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + finalMessage));
@@ -53,7 +59,9 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
                 }
                 e.setCancelled(true);
             }
+            // Check /staffchat
         } else if(hasEnabled.containsKey(p) && hasEnabled.get(p) && p.hasPermission("simplestaffchat.use")) {
+            // Send message
             for(Player player : Bukkit.getOnlinePlayers()) {
                 if(player.hasPermission("simplestaffchat.use")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + message));
@@ -67,6 +75,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
+        // Add to HashMap
         if(p.hasPermission("simplestaffchat.use")) {
             hasEnabled.put(p, false);
         }
@@ -76,6 +85,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
     public void onPlayerLeave(PlayerQuitEvent e) {
         Player p = e.getPlayer();
 
+        // Remove from HashMap
         if(hasEnabled.containsKey(p)) {
             hasEnabled.remove(p);
         }
