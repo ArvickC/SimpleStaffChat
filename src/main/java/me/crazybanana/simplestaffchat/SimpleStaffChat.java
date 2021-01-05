@@ -30,17 +30,6 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         getCommand("staffchat").setExecutor(new Staffchat(this));
         getCommand("staffchatreload").setExecutor(new StaffchatReload(this));
 
-        // Update Check
-        new UpdateChecker(this, 87460).getVersion(version -> {
-            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                // logger.info("There is not a new update available.");
-                update = false;
-            } else {
-                // logger.info("There is a new update available.");
-                update = true;
-            }
-        });
-
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &ePlugin&a Activated&e."));
     }
 
@@ -59,7 +48,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
 
         // Check start
         if(message.startsWith(start)) {
-            String finalMessage = message.replaceFirst("# ", "");
+            String finalMessage = message.replaceFirst(getConfig().getString("Character"), "");
 
             // Permission
             if(p.hasPermission("simplestaffchat.use")) {
