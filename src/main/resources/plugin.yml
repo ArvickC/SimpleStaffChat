@@ -11,6 +11,9 @@ permissions:
   simplestaffchat.reload:
     default: op
     description: Allows you to reload the plugin.
+  simplestaffchat.update:
+    default: op
+    description: Messages you when there is an update.
 commands:
   staffchat: # ../me/crazybanana/simplestaffchat/commands/staffchat.java
     description: Main command for the plugin
