@@ -66,6 +66,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(player.hasPermission("simplestaffchat.use")) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + finalMessage));
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + finalMessage));
                     }
                 }
                 e.setCancelled(true);
@@ -76,6 +77,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 if(player.hasPermission("simplestaffchat.use")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + message));
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + message));
                 }
             }
             e.setCancelled(true);
