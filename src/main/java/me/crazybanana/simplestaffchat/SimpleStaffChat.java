@@ -30,13 +30,12 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         getCommand("staffchat").setExecutor(new Staffchat(this));
         getCommand("staffchatreload").setExecutor(new StaffchatReload(this));
 
-        // Update Check
         new UpdateChecker(this, 87460).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                // logger.info("There is not a new update available.");
+                //logger.info("There is not a new update available.");
                 update = false;
             } else {
-                // logger.info("There is a new update available.");
+                //logger.info("There is a new update available.");
                 update = true;
             }
         });
@@ -59,7 +58,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
 
         // Check start
         if(message.startsWith(start)) {
-            String finalMessage = message.replaceFirst("# ", "");
+            String finalMessage = message.replaceFirst(getConfig().getString("Character"), "");
 
             // Permission
             if(p.hasPermission("simplestaffchat.use")) {
@@ -67,6 +66,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(player.hasPermission("simplestaffchat.use")) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + finalMessage));
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + finalMessage));
                     }
                 }
                 e.setCancelled(true);
@@ -77,6 +77,7 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 if(player.hasPermission("simplestaffchat.use")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + message));
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eStaff Chat&8 >> &7" + p.getName() + "&8 >> &7" + message));
                 }
             }
             e.setCancelled(true);
@@ -88,10 +89,12 @@ public final class SimpleStaffChat extends JavaPlugin implements Listener {
         Player p = e.getPlayer();
 
         // Add to HashMap
-        if(p.hasPermission("simplestaffchat.use")) {
+        if(p.hasPermission("simplestaffchat.update")) {
             hasEnabled.put(p, false);
             if(update) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &eHey user, there is an &aupdate&e to Simple Staff Chat!"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &eYou can &cdownload &eit here:"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&eSimpleStaffChat&7] &chttps://www.spigotmc.org/resources/simple-staff-chat.87460/"));
             }
         }
     }
