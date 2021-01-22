@@ -3,6 +3,7 @@ package me.crazybanana.simplestaffchat.commands;
 import me.crazybanana.simplestaffchat.SimpleStaffChat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,10 +28,12 @@ public class Staffchat implements CommandExecutor {
                 if(!SimpleStaffChat.hasEnabled.get(p)) {
                     // Enable
                     SimpleStaffChat.hasEnabled.replace(p, true);
+                    p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 1);
                     sendPlayerTitle(pl, p);
                 } else {
                     // Disable
                     SimpleStaffChat.hasEnabled.replace(p, false);
+                    p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 0.5f);
                 }
 
             } else {
